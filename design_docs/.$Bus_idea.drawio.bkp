@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2023-07-28T01:06:11.059Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.5 Chrome/114.0.5735.243 Electron/25.3.1 Safari/537.36" etag="_T-OqaVNt086vP8tufab" version="21.6.5" type="device">
+<mxfile host="Electron" modified="2023-07-28T00:58:40.299Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.5 Chrome/114.0.5735.243 Electron/25.3.1 Safari/537.36" etag="O_c0DSpN6u_9MClY0nSO" version="21.6.5" type="device">
   <diagram name="Page-1" id="oWkD6Wb1NbWKEjMFCBf-">
     <mxGraphModel dx="2074" dy="878" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -94,7 +94,7 @@
         <mxCell id="2IK1CEsPObRKjQOFpOGc-44" value="typing test, random characters generated, user needs to input, errror is failure" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="330" y="1140" width="120" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="2IK1CEsPObRKjQOFpOGc-45" value="Bounce a ball within a closed space, 3d with three-js. Bounce a random number of times." style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="2IK1CEsPObRKjQOFpOGc-45" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="480" y="1140" width="130" height="140" as="geometry" />
         </mxCell>
       </root>
