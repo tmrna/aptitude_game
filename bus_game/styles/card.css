@@ -1,0 +1,15 @@
+.card{
+	background-color: tan;
+	color: black;
+	font: serif;
+	border-color: black;
+	border-radius: 10px;
+	border-width: thin;
+	width: 75%;
+	height: 100%;
+	margin: auto;
+	text-align: center;
+	box-shadow: 7px 7px 2px gray;
+	cursor: pointer;
+}
+
