@@ -1,30 +1,10 @@
-import randBool from "../utilities/rand_bool";
-
+import { genAllocVal, makeEven } from "./allocation_helper";
 export default function allocationCalculator(value, allocationType) {
   if (allocationType === "Contiguous"){
-    //return genAllocVal(value);
-    return 1;
+    return genAllocVal(value);
   }  
   else {
-    //return makeEven(genAllocVal(value));
-    return 0;
+    return makeEven(genAllocVal(value));
   }
 }
 
-function getAdjustment() {
-  return Math.floor(Math.random() * 10);
-}
-
-function genAllocVal(value, adjustment) {
-  const adjustment = getAdjustment();
-  var allocationValue = Math.floor(Math.random() * 10 * value) % 50;
-  allocationValue += randBool() ? adjustment : (-1) * adjustment;
-  return allocationValue === 0 ? adjustment: Math.abs(allocationValue);
-}
-
-function makeEven(val) {
-  if (val === 0) {
-    return 2;
-  }
-  return val + (val % 2 ? 0 : 1);
-}
