@@ -1,5 +1,5 @@
 import './App.css';
-import Card from '../components/interactable/card';
+import Card from '../components/interactable/card/card';
 function App() {
 
   return (
@@ -7,7 +7,6 @@ function App() {
     <Card/>
     <Card/>
     <Card/>
-
     </>
   )
 }
