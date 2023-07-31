@@ -2,9 +2,9 @@ import './App.css';
 import Card from '../components/interactable/card/card';
 import CardDeck from '../components/interactable/card/card_deck';
 import CardChoiceBox from '../components/interactable/card/card_choice_box';
-import Board from '../components/non_interactable/board';
-import ViewPort from '../components/non_interactable/view_port';
-import bufferBox from '../components/non_interactable/buffer_box';
+import Board from '../components/non_interactable/board/board';
+import ViewPort from '../components/non_interactable/view_port/view_port';
+import bufferBox from '../components/non_interactable/buffer_box/buffer_box';
 import React from 'react';
 import { randBool } from '../lib/utilities/rand';
 function App() {

@@ -1,4 +1,4 @@
-import "../../styles/buffer_box.css"
+import "../../../styles/buffer_box.css"
 export default function bufferBox(occupied, color, index) {
 	if(!occupied) {
 		color = "white";
