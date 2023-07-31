@@ -1,12 +1,11 @@
 .card {
 	position: relative;
- 	display: table;
 	background-color: tan;
 	color: black;
 	border: 2px solid black;	
 	border-radius: 10px;
-	width: 80%;
-	height: 115%;
+	width: 215px;
+	height: 215px;
 	text-align: center;
 	cursor: pointer;
 	transition: all .2s ease-in-out;
@@ -53,6 +52,34 @@
 	border-top-left-radius: 12px;
 	margin: auto;
 	width: 200px;
-	top: 34px;
+	height: 200px;
+	top: -13px;
 	text-align: center;
+}
+
+.cardDeck {
+	position: relative;
+ 	display: table;
+	background-color: orange;
+	color: black;
+	border: 2px solid black;	
+	border-radius: 10px;
+	width: 280px;
+	height: 294px;
+	text-align: center;
+	cursor: pointer;
+	transition: all .2s ease-in-out;
+	justify-content: center;
+}
+
+.cardDeck:hover {
+	z-index: 10;
+	border-radius: 10px;
+	box-shadow: 0 20px 30px gold;
+	transform: scale(1.1, 1.1);
+}
+
+.cardChoiceBox {
+	display:flex;
+	margin: 3px;
 }
