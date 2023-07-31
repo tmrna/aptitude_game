@@ -1,9 +1,9 @@
 import "../../styles/buffer_box.css"
-export default function bufferBox(occupied, color) {
-	if(occupied == "false") {
+export default function bufferBox(occupied, color, index) {
+	if(!occupied) {
 		color = "white";
 	}
 	return (
-		<div className = "bufferBox" style = {{backgroundColor: color}}/>
+		<div className = "bufferBox" style = {{backgroundColor: color}} key={index}/>
 	)	
 }
