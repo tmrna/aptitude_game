@@ -2,10 +2,10 @@ import BoxDetails from "./box_details";
 
 export default function genBufferBoxDetails(boxCount) {
 	if(isNaN(boxCount)){
-		throw new Error("provided size is not a number");
+		throw new TypeError("provided size is not a number");
 	}
 	if(!Number.isInteger(boxCount)) {
-		throw new Error("provided size is not an integer");
+		throw new TypeError("provided size is not an integer");
 	}
 	if(boxCount < 0) {
 		throw new Error("Cannot use negative box count");
