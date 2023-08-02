@@ -1,6 +1,7 @@
 export function isNatural(num) {
   if(isNaN(num)) return false;
   if(!Number.isInteger(num) || num < 0) return false;
+  return true;
 }
 
 export function makeNatural(num) {
