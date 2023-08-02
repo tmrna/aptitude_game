@@ -3,7 +3,6 @@ export const AllocationTypes = {
   Contiguous: "Contiguous",
 }
 
-export const NUM_COLORS = Object.keys(Colors).length;
 
 export const Colors = {
   fuschia: "fuschia",
@@ -26,3 +25,6 @@ export const Colors = {
   brown: "brown",
   orchid: "orchid",
 }
+
+export const NUM_COLORS = Object.keys(Colors).length;
+
