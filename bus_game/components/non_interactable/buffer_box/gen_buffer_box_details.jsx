@@ -12,7 +12,12 @@ export default function genBufferBoxDetails(boxCount) {
 	}
 	const boxes = Array(boxCount);
 	for( let i = 0; i < boxes.length; ++i) {
-		boxes[i] = new BoxDetails(false, "blue");
+		if(i % 2){
+			boxes[i] = new BoxDetails(false, "orange");
+		}
+		else{
+			boxes[i] = new BoxDetails(true, "blue");
+		}
 	}
 	return boxes;
 }
