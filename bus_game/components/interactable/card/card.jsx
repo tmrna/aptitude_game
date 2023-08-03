@@ -1,9 +1,11 @@
 import "../../../styles/card.css";
-import allocationCalculator from "../../../lib/allocation/allocation_calculator";
+import allocationCalculator from "../../../lib/card_utils/card_allocation_calculator";
 import { randBool, randNatural } from "../../../lib/utilities/rand";
 import CardHeader from "./card_header";
 import CardBody from "./card_body";
-export default function Card( { children} ) {
+import { AllocationTypes } from "../../../lib/allocation/allocation_types";
+
+export default function Card( {children}/*{value}, {turnsRemaining}, {allocationType}*/ ) {
 
 	/*
 	 *	the following will eventually be props:
@@ -13,7 +15,7 @@ export default function Card( { children} ) {
 	const initialTurns = randNatural(1, 10);
 	const pointValue = initialTurns === 1 ? 1 : initialTurns + initialTurns - 1;
 	var turnsRemaining = initialTurns;
-	const allocationType = randBool() ? "Contiguous" : "Non-contiguous";
+	const allocationType = randBool() ? AllocationTypes.Contiguous : AllocationTypes.NonContiguous;
 	const allocationCost = allocationCalculator(pointValue, allocationType);
 	
 	return (

@@ -5,7 +5,7 @@ export const AllocationTypes = {
 
 
 export const Colors = {
-  fuschia: "fuschia",
+  fuchsia: "fuchsia",
   lightSteelBlue: "lightSteelBlue",
   royalBlue: "royalBlue",
   navy: "navy",
@@ -33,7 +33,7 @@ export function genRandColor() {
 	const choice = randNatural(0, NUM_COLORS - 1);
 	switch(choice) {
 		case 0:
-			return Colors.fuschia;
+			return Colors.fuchsia;
 		case 1:
 			return Colors.lightSteelBlue;
 		case 2:

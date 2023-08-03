@@ -1,4 +1,4 @@
-import { randBool, randNatural } from "../utilities/rand";
+import { randNatural } from "../utilities/rand";
 
 export function getAdjustment() {
   return randNatural(0, 10);

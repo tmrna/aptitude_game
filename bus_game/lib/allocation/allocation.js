@@ -1,7 +1,8 @@
 import { AllocationTypes } from "./allocation_types";
 import { genContiguousAlloc, genNonContiguousAlloc, getFreeBoxIndicies } from "./allocation_helper";
 
-export function makeAllocation(boxArray, {allocationType}, {allocationSize}) {
+export function makeAllocation(boxArray, allocationType, allocationSize) {
+	console.log("getting free indicies");
 	var freeIndicies = getFreeBoxIndicies(boxArray);
 	const err = "Allocation cannot be made: ";
 
@@ -10,16 +11,16 @@ export function makeAllocation(boxArray, {allocationType}, {allocationSize}) {
 
 
 	if(allocationType === AllocationTypes.NonContiguous) {
+	    console.log("making non contig alloc");
 	    return genNonContiguousAlloc(boxArray, freeIndicies, allocationSize);
 	}
 
-	if(allocationType === AllocationTypes.Contiguous) {
           try {
+	    console.log("making contig alloc");
            return genContiguousAlloc(boxArray, freeIndicies, allocationSize);
           } catch (allocError) {
             throw new Error(err + allocError.message); 
           }
-	}
 
 
 }

@@ -42,48 +42,52 @@ export function genColorChoice(boxArray) {
 }
 
 export function genNonContiguousAlloc(boxArray, freeIndiciesArray, allocationSize) {
-	const colorChoice = genColorChoice(boxArray);
+	const colorChoice = genColorChoice(boxArray);	
 	
-	while(allocationSize > 0) {
-		const popIndex = randNatural(0, freeIndiciesArray.length - 1);
-		delete freeIndiciesArray[popIndex];
-		boxArray[popIndex].occupied = true;
-		boxArray[popIndex].color = colorChoice;
+	const shuffel = () => {
+		for(let i = freeIndiciesArray.length - 1; i > 0 ; --i) {
+			var targetIndex = randNatural(0, i);
+			var tmp = freeIndiciesArray[i];
+			freeIndiciesArray[i] = freeIndiciesArray[targetIndex];
+			freeIndiciesArray[targetIndex] = tmp;
+		}	
 	}
-
+	shuffel();
+	for(let i  = 0; i < allocationSize; ++i) {
+		const index = freeIndiciesArray[i];
+		boxArray[index].color = colorChoice;
+		boxArray[index].occupied = true;
+	}	
 	return boxArray;
 }
 
 export function genContiguousAlloc(boxArray, freeIndiciesArray, allocationSize) {
 	const colorChoice = genColorChoice(boxArray);
 
-	const setAlloc = (index) => {
-		boxArray[index].occupied = true;
-		boxArray[index].color = colorChoice;
-	}
-
 	if(freeIndiciesArray.length === boxArray.length) {
 		var left = randNatural(0, boxArray.length - 1 - allocationSize);
 		const right = left + allocationSize;
 		while(left < right) {
-			setAlloc(left);
+			boxArray[left].occupied = true;
+			boxArray[left].color = colorChoice;
 			++left;
 		}
 		return boxArray;
 	}
 
 	else if(freeIndiciesArray.length === 1) {
-		setAlloc(freeIndiciesArray[0]);
+		boxArray[freeIndiciesArray[0]].color = colorChoice;
+		boxArray[freeIndiciesArray[0]].occupied = true;
 		return boxArray;
 	}
-
 	var possibleDestinations = [];
 	var ptr = 0;
-	var upperBound;
 	while(ptr < freeIndiciesArray.length - allocationSize) {
-		upperBound = ptr + allocationSize;
-		if(freeIndiciesArray[upperBound] - freeIndiciesArray[ptr] === allocationSize) {
-			possibleDestinations.push([ptr, upperBound]);
+		const ptrFront = ptr + allocationSize;
+		const valueLb = freeIndiciesArray[ptr];
+		const valueUb = freeIndiciesArray[ptrFront];
+		if(valueUb - valueLb === allocationSize) {
+			possibleDestinations.push([valueLb, valueUb]);
 		}
 		++ptr;
 	}
@@ -92,10 +96,11 @@ export function genContiguousAlloc(boxArray, freeIndiciesArray, allocationSize) 
 		throw new Error("no segment long enough for allocation");
 	}
 
-	const destinationChoice = randNatural(0, possibleDestinations.length - 1);
-	
+	const destinationChoiceIndex = randNatural(0, possibleDestinations.length - 1);
+	const destinationChoice = possibleDestinations[destinationChoiceIndex];
 	for(let i = destinationChoice[0]; i <= destinationChoice[1]; ++i) {
-		setAlloc(i);
+		boxArray[i].occupied = true;
+		boxArray[i].color = colorChoice;
 	}
 
 	return boxArray;

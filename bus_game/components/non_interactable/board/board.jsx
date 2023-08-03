@@ -6,19 +6,39 @@ import BufferBoxDisplay from "../buffer_box/buffer_box_display";
 import CardChoiceBox from "../../interactable/card/card_choice_box"; 
 import Card from "../../interactable/card/card";
 import CardDeck from "../../interactable/card/card_deck";
-import UserPlaque from "../info_displays/user_plaque";import { useState } from "react";
-
+import UserPlaque from "../info_displays/user_plaque";
+import { useState } from "react";
+import { randBool, randNatural } from "../../../lib/utilities/rand";
+import { AllocationTypes } from "../../../lib/allocation/allocation_types";
+import { makeAllocation } from "../../../lib/allocation/allocation"; 
 export default function Board() {
+	
+	///////////////////////// BOXES //////////////////////////////////////
 	const boxCount = 100;
 	var boxInfo = genBufferBoxDetails(boxCount);
 	const [boxStates, setBoxArray] = useState(boxInfo);
 	const boxes = MapBufferBoxes(boxStates);
-	console.log(boxInfo);
-	const score = 5;
-	const turnCount = 4;
+	///////////////////////// END BOXES /////////////////////////////////
+	
+	////////////////////// SCORE BOARD /////////////////////////////////
+	const [score, setScore] = useState(0);
+	const [turnCount, setTurns] = useState(0);
+	const addScore = (value) => {
+		setScore(score + value);
+	}
+	const incrementTurns = () => {
+		setTurns(turnCount + 1);
+	}
 	const upperLeft = ScoreBoard(turnCount, score);
+	////////////////////END SCORE BOARD //////////////////////////////
+	
+	////////////////////////PLAYER PLAQUE ////////////////////////////
 	const username = "Player 1";
 	const playerPlaque = UserPlaque(username);
+	////////////////////////END PLAYER PLAQUE ////////////////////////
+
+	//const boxes = MapBufferBoxes(boxStates);
+
 	return(
 		<div className = "board">	
 			<CardChoiceBox>
@@ -36,12 +56,22 @@ export default function Board() {
 				<Card/>
 			</CardChoiceBox>
 			<button onClick={()=>{
-				for(let i = 0; i < boxCount; ++i) {
-					boxInfo[i].occupied = true;
-					boxInfo[i].color = "purple";
+				//// testing buff alloc
+				boxInfo = boxStates;
+				const allocType = randBool() ? AllocationTypes.Contiguous : AllocationTypes.NonContiguous;
+				try {
+					setBoxArray(makeAllocation(boxStates, allocType, randNatural(1, 10)));
+					incrementTurns();
+					addScore(3);
+				} catch (error) {
+					alert("GAME OVER\n" + error.message);
+					for(let i = 0; i < boxCount; ++i) {
+						boxInfo[i].occupied = false;
+					}
+					setTurns(0);
+					setScore(0);
 				}
-				setBoxArray(boxInfo);
-				console.log(boxStates);
+				// end testing buff alloc
 			}}> CLICK ME </button>
 			<BufferBoxDisplay>
 				{boxes}
