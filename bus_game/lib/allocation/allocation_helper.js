@@ -1,18 +1,102 @@
-import { randBool, randNatural } from "../utilities/rand";
+import { Colors, NUM_COLORS, genRandColor } from "./allocation_types";
+import { randNatural } from "../utilities/rand";
 
-export function getAdjustment() {
-  return randNatural(0, 10);
+
+export function getFreeBoxIndicies(boxArray) {
+	var result = [];
+	for(let i = 0; i < boxArray.length; ++i) {
+		if(!boxArray[i].occupied) result.push(i);
+	}
+	return result;
 }
 
-export function genAllocVal(value) {
-  var allocationValue = (randNatural(1, 99)) % 50;
-  return allocationValue + value;
+export function genColorOptions(boxArray) {
+	var boxColors = [];
+	for(let i = 0; i < boxArray.length; ++i) {
+		if(!boxArray[i].color) throw new Error("Uninitialized box color!");
+
+		if(!boxArray[i].occupied && !(boxArray[i].color in boxColors)){
+			boxColors.push(boxArray[i].color);
+		}
+	}
+	if(boxColors.length === NUM_COLORS){
+		console.log("exceeded max colors");
+		return [genRandColor()];
+	}
+
+	var colorOptions = Object.keys(Colors);
+	for(let i = 0; i < boxColors.length; ++i) {
+		if(boxColors[i] in colorOptions) {
+			const targetIndex = colorOptions.indexOf(boxColors[i]);
+			if(targetIndex)
+				colorOptions.splice(targetIndex, 1);
+		}
+	}
+
+	return colorOptions;
 }
 
-export function makeEven(val) {
-  if (val == 0) {
-    return 2;
-  }
-  return val + (val % 2 == 0 ? 0 : 1);
+export function genColorChoice(boxArray) {
+	var colorOptions = genColorOptions(boxArray);
+	return colorOptions[randNatural(0, colorOptions.length - 1)];
 }
 
+export function genNonContiguousAlloc(boxArray, freeIndiciesArray, allocationSize) {
+	const colorChoice = genColorChoice(boxArray);
+	
+	while(allocationSize > 0) {
+		const popIndex = randNatural(0, freeIndiciesArray.length - 1);
+		delete freeIndiciesArray[popIndex];
+		boxArray[popIndex].occupied = true;
+		boxArray[popIndex].color = colorChoice;
+	}
+
+	return boxArray;
+}
+
+export function genContiguousAlloc(boxArray, freeIndiciesArray, allocationSize) {
+	const colorChoice = genColorChoice(boxArray);
+
+	const setAlloc = (index) => {
+		boxArray[index].occupied = true;
+		boxArray[index].color = colorChoice;
+	}
+
+	if(freeIndiciesArray.length === boxArray.length) {
+		var left = randNatural(0, boxArray.length - 1 - allocationSize);
+		const right = left + allocationSize;
+		while(left < right) {
+			setAlloc(left);
+			++left;
+		}
+		return boxArray;
+	}
+
+	else if(freeIndiciesArray.length === 1) {
+		setAlloc(freeIndiciesArray[0]);
+		return boxArray;
+	}
+
+	var possibleDestinations = [];
+	var ptr = 0;
+	var upperBound;
+	while(ptr < freeIndiciesArray.length - allocationSize) {
+		upperBound = ptr + allocationSize;
+		if(freeIndiciesArray[upperBound] - freeIndiciesArray[ptr] === allocationSize) {
+			possibleDestinations.push([ptr, upperBound]);
+		}
+		++ptr;
+	}
+
+	if(possibleDestinations.length === 0) {
+		throw new Error("no segment long enough for allocation");
+	}
+
+	const destinationChoice = randNatural(0, possibleDestinations.length - 1);
+	
+	for(let i = destinationChoice[0]; i <= destinationChoice[1]; ++i) {
+		setAlloc(i);
+	}
+
+	return boxArray;
+}
