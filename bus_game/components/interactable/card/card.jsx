@@ -5,33 +5,28 @@ import CardHeader from "./card_header";
 import CardBody from "./card_body";
 import { AllocationTypes } from "../../../lib/allocation/allocation_types";
 
-export default function Card( {children}/*{value}, {turnsRemaining}, {allocationType}*/ ) {
+export default function Card( cardData ) {
 
 	/*
 	 *	the following will eventually be props:
 	 *		turns remaining
 	 *
 	 */	
-	const initialTurns = randNatural(1, 10);
-	const pointValue = initialTurns === 1 ? 1 : initialTurns + initialTurns - 1;
-	var turnsRemaining = initialTurns;
-	const allocationType = randBool() ? AllocationTypes.Contiguous : AllocationTypes.NonContiguous;
-	const allocationCost = allocationCalculator(pointValue, allocationType);
 	
 	return (
 		<div 
 		className="card"
+		style = {{backgroundColor: cardData.allocColor}}
 		draggable
 		>
 		<CardHeader>
-		<p>Value: {pointValue}</p>
+		<p>Value: {cardData.value}</p>
 		</CardHeader>
 		<div className = "spacer"/>
 		<CardBody>
-		<p>Turns reamaining: {turnsRemaining}</p>
-		<p>Allocation: {allocationType}</p>
-		<p>Space Required: {allocationCost}</p>
-		{children}
+		<p>Turns reamaining: {cardData.turnCt}</p>
+		<p>Allocation: {cardData.allocationType}</p>
+		<p>Space Required: {cardData.allocationSize}</p>
 		</CardBody>
 		</div>
 	)	
