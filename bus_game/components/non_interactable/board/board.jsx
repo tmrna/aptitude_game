@@ -8,15 +8,16 @@ import Card from "../../interactable/card/card";
 import CardDeck from "../../interactable/card/card_deck";
 import UserPlaque from "../info_displays/user_plaque";
 import { useState } from "react";
-import { randBool, randNatural } from "../../../lib/utilities/rand";
-import { AllocationTypes } from "../../../lib/allocation/allocation_types";
+import { randNatural, randAllocType } from "../../../lib/utilities/rand";
 import { makeAllocation } from "../../../lib/allocation/allocation"; 
+import { genCardData } from "../../interactable/card/card_data";
+import { genColorChoice } from "../../../lib/allocation/allocation_helper";
 export default function Board() {
 	
 	///////////////////////// BOXES //////////////////////////////////////
 	const boxCount = 100;
-	var boxInfo = genBufferBoxDetails(boxCount);
-	const [boxStates, setBoxArray] = useState(boxInfo);
+	const boxInitial = genBufferBoxDetails(boxCount);
+	const [boxStates, setBoxArray] = useState(boxInitial);
 	const boxes = MapBufferBoxes(boxStates);
 	///////////////////////// END BOXES /////////////////////////////////
 	
@@ -37,7 +38,47 @@ export default function Board() {
 	const playerPlaque = UserPlaque(username);
 	////////////////////////END PLAYER PLAQUE ////////////////////////
 
-	//const boxes = MapBufferBoxes(boxStates);
+	
+	////////////////////////////CARDS////////////////////////////
+	const [cardDataStates, setCardDataStates] = useState(genCardData(genColorChoice(boxStates)))
+	
+	const allocBuffer = (cardData) => {
+		const color = cardData.allocColor;
+		const turns = cardData.turnCt;
+		const type = cardData.allocationType;
+		const size = cardData.allocationSize;
+		const value = cardData.value;
+		try {
+			console.log(boxStates);
+			console.log(cardDataStates);
+			setBoxArray(makeAllocation(boxStates, type, size, color, turns));
+			incrementTurns();
+			addScore(value);
+		} catch (error) {
+			const scoreStr = "\nYour score was: " + score.toString();
+			alert("GAME OVER\n" + error.message + scoreStr);
+			setBoxArray(boxInitial);
+			setTurns(0);
+			setScore(0);
+		}
+	}	
+	const makeCards = () => {
+		setCardDataStates(genCardData(genColorChoice(boxStates)));
+	}
+	const clickCard1 = () => {
+		allocBuffer(cardDataStates.cards["card-1"]);
+		makeCards();
+	}
+
+	const clickCard2 = () => {
+		allocBuffer(cardDataStates.cards["card-2"]);
+		makeCards();
+	}
+
+	const clickCard3 = () => {
+		allocBuffer(cardDataStates.cards["card-3"]);
+		makeCards();
+	}
 
 	return(
 		<div className = "board">	
@@ -51,28 +92,17 @@ export default function Board() {
 				</div>
 			</CardChoiceBox>
 			<CardChoiceBox>
-				<Card/>
-				<Card/>
-				<Card/>
+				<div onClick = {clickCard1}>
+				{Card(cardDataStates.cards["card-1"])}
+				</div>
+				<div onClick = {clickCard2}>
+				{Card(cardDataStates.cards["card-2"])}
+				</div>
+				<div onClick = {clickCard3}>
+				{Card(cardDataStates.cards["card-3"])}
+				</div>
 			</CardChoiceBox>
-			<button onClick={()=>{
-				//// testing buff alloc
-				boxInfo = boxStates;
-				const allocType = randBool() ? AllocationTypes.Contiguous : AllocationTypes.NonContiguous;
-				try {
-					setBoxArray(makeAllocation(boxStates, allocType, randNatural(1, 10)));
-					incrementTurns();
-					addScore(3);
-				} catch (error) {
-					alert("GAME OVER\n" + error.message);
-					for(let i = 0; i < boxCount; ++i) {
-						boxInfo[i].occupied = false;
-					}
-					setTurns(0);
-					setScore(0);
-				}
-				// end testing buff alloc
-			}}> CLICK ME </button>
+			<div style={{width: "30px", height: "40px"}}/>
 			<BufferBoxDisplay>
 				{boxes}
 			</BufferBoxDisplay>
