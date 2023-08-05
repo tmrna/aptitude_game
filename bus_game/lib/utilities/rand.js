@@ -1,4 +1,4 @@
-import { makeNatural } from "./type";
+import { AllocationTypes } from "../allocation/allocation_types";
 
 export function randBool() {
   return Math.floor(Math.random() * 2);
@@ -16,3 +16,16 @@ export function randNatural(lowerBound, upperBound) {
   return Math.floor(Math.random() * (difference + 1)) + lowerBound;
 }
 
+export function shuffel(targetArray) {
+  const len = targetArray.length;
+  for(let i = 0; i < len; ++i) {
+    const tmp = targetArray[i];
+    const swapIndex = randNatural(0, len - 1);
+    targetArray[i] = targetArray[swapIndex];
+    targetArray[swapIndex] = tmp;
+  }
+}
+
+export function randAllocType() {
+  return randBool() ? AllocationTypes.NonContiguous : AllocationTypes.Contiguous;
+}
