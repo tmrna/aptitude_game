@@ -8,7 +8,6 @@ import Card from "../../interactable/card/card";
 import CardDeck from "../../interactable/card/card_deck";
 import UserPlaque from "../info_displays/user_plaque";
 import { useState } from "react";
-import { randNatural, randAllocType } from "../../../lib/utilities/rand";
 import { makeAllocation } from "../../../lib/allocation/allocation"; 
 import { genCardData } from "../../interactable/card/card_data";
 import { genColorChoice } from "../../../lib/allocation/allocation_helper";
