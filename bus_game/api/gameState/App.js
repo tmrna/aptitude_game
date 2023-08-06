@@ -1,3 +1,11 @@
+// why make this api:
+// 	if the user closes the browser on the turn and they choose to log back in or page refresh they
+// 	should be given the opportunity to continue their game
+//
+
+// responsibilities of this api:
+// 	store game state after each move, retrieve game state upon request
+
 const PORT = !process.env.PORT ? 8080 : process.env.PORT;
 
 const express = require('express');
@@ -30,10 +38,11 @@ app.use(express.json());
  *
  * request -> response
  * response = {
- * 	status: 200, // if game state is the same as in db
+ * 	status: 200, // if game state is the same as in db, otherwise return error code + msg
  * 	result: {
  * 		gameOver: true,
- * 		cards: {
+ * 		cards: { // use these cards to reset game state so players can't just refresh until they get the
+ * 			// card they want
  * 			card1: {
  * 				color: _,
  *	 			value: _,
@@ -47,19 +56,23 @@ app.use(express.json());
  *		bufferStatus: "[[false, 'orange', 0], [true, 'chocolate', 8], ...]",
  * 	},
  * 	header: {
- * 		playerName: "playerOne",
- * 		doNotStore: false,
  * 		gameMsg: "allocation too large", // empty if gameover is false
+ *		// after game over upload score, delete game from db
  * 	}
  * }
  *
- * request = {
+ * request(post or patch) = {
  * 	body: {
  * 		playerName: "playerOne",
- *		cardSelected: "card1",
+ *		cards: {
+ *			card1: ... 
+ *		}
+ *		bufferStatus:....
+ *		etc.
  * 	},
  * 	header: {
  * 		doNotStore: false,
+ * 		key: _
  * 	}
  *
  * }
