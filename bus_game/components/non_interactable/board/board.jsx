@@ -75,6 +75,7 @@ export default function Board() {
 			setBoxArray(boxInitial);
 			setTurns(0);
 			setScore(0);
+			setTurnSkipCt(0);
 		}
 	}	
 	const makeCards = () => {
