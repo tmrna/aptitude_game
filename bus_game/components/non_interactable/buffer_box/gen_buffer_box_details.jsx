@@ -1,16 +1,9 @@
 import BoxDetails from "./box_details";
 
-export default function genBufferBoxDetails(boxCount) {
-	if(isNaN(boxCount)){
-		throw new TypeError("provided size is not a number");
-	}
-	if(!Number.isInteger(boxCount)) {
-		throw new TypeError("provided size is not an integer");
-	}
-	if(boxCount < 0) {
-		throw new Error("Cannot use negative box count");
-	}
-	const boxes = Array(boxCount);
+export const BOX_COUNT = 100;
+
+export default function genBufferBoxDetails() {
+	const boxes = Array(BOX_COUNT);
 	for( let i = 0; i < boxes.length; ++i) {
 			boxes[i] = new BoxDetails(false, "white", 0);
 	}
