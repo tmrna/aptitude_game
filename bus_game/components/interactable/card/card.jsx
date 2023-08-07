@@ -5,7 +5,7 @@ import CardHeader from "./card_header";
 import CardBody from "./card_body";
 import { AllocationTypes } from "../../../lib/allocation/allocation_types";
 
-export default function Card( cardData ) {
+export default function Card( {cardData} ) {
 
 	/*
 	 *	the following will eventually be props:

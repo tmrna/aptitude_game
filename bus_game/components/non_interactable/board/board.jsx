@@ -5,14 +5,14 @@ import MapBufferBoxes from "../buffer_box/map_buffer_boxes";
 import BufferBoxDisplay from "../buffer_box/buffer_box_display";
 import CardChoiceBox from "../../interactable/card/card_choice_box"; 
 import Card from "../../interactable/card/card";
-import CardDeck from "../../interactable/card/card_deck";
+import SkipDiv from "../../interactable/card/skip_div";
 import UserPlaque from "../info_displays/user_plaque";
 import { useState } from "react";
 import { makeAllocation } from "../../../lib/allocation/allocation"; 
 import { genCardData } from "../../interactable/card/card_data";
 import { genColorChoice } from "../../../lib/allocation/allocation_helper";
 export default function Board() {
-	
+		
 	///////////////////////// BOXES //////////////////////////////////////
 	const boxCount = 100;
 	const boxInitial = genBufferBoxDetails(boxCount);
@@ -64,21 +64,24 @@ export default function Board() {
 	const makeCards = () => {
 		setCardDataStates(genCardData(genColorChoice(boxStates)));
 	}
-	const clickCard1 = () => {
-		allocBuffer(cardDataStates.cards["card-1"]);
-		makeCards();
+
+	const genCardClickHandlers = () => {
+		const handlers = [];
+		for(var cardKey in cardDataStates.cards) {
+			const card = cardDataStates.cards[cardKey];
+			const clickHandler = () => {
+				allocBuffer(card);
+				makeCards();
+			}
+			handlers.push(clickHandler);
+		}
+		return handlers;
 	}
 
-	const clickCard2 = () => {
-		allocBuffer(cardDataStates.cards["card-2"]);
-		makeCards();
-	}
-
-	const clickCard3 = () => {
-		allocBuffer(cardDataStates.cards["card-3"]);
-		makeCards();
-	}
-
+	var cardHandlers = genCardClickHandlers();
+	
+	///////////////////////////////////////  PAGE /////////////////////////////////////////////
+	
 	return(
 		<div className = "board">	
 			<CardChoiceBox>
@@ -87,24 +90,25 @@ export default function Board() {
 				</div>
 				{playerPlaque}
 				<div className = "rightFlex">
-				<CardDeck/>
+					<SkipDiv active = {true} clickHandler = {makeCards}/>
 				</div>
 			</CardChoiceBox>
 			<CardChoiceBox>
-				<div onClick = {clickCard1}>
-				{Card(cardDataStates.cards["card-1"])}
-				</div>
-				<div onClick = {clickCard2}>
-				{Card(cardDataStates.cards["card-2"])}
-				</div>
-				<div onClick = {clickCard3}>
-				{Card(cardDataStates.cards["card-3"])}
-				</div>
+				{Object.keys(cardDataStates.cards).map( (key, index) => {
+					const cardData = cardDataStates.cards[key];
+					return(
+						<div onClick = {cardHandlers[index]} >
+						<Card cardData = {cardData}/>
+						</div>
+					)
+				})}	
 			</CardChoiceBox>
 			<div style={{width: "30px", height: "40px"}}/>
+			<CardChoiceBox>
 			<BufferBoxDisplay>
 				{boxes}
 			</BufferBoxDisplay>
+			</CardChoiceBox>
 		</div>
 	);
 }

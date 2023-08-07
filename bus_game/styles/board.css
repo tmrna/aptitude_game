@@ -1,13 +1,12 @@
 .board {
-	position: absolute;
-	width: 1500px;
-	height: 100%;
+	width: 90%;
+	height: 90%;
 	border: 2px solid snow;
 	border-radius: 12px;
 	background-color: darkgray;
-	top: 0px;
-	bottom: 0px;
-	margin: 3px;
+	padding: 1rem;
+	min-width: 1200px;
+	min-height: 480px;
 }
 
 .leftFlex {
