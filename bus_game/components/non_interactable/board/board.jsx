@@ -11,10 +11,9 @@ import { useState } from "react";
 import { makeAllocation, countDown } from "../../../lib/allocation/allocation"; 
 import { genCardData } from "../../interactable/card/card_data";
 import { genColorChoice } from "../../../lib/allocation/allocation_helper";
-
+import GameOverPopup from "../../interactable/popup/game_over";
 
 export default function Board() {
-		
 	///////////////////////// BOXES //////////////////////////////////////
 	const boxCount = BOX_COUNT;
 	const boxInitial = genBufferBoxDetails(boxCount);
@@ -33,7 +32,23 @@ export default function Board() {
 		incrementSkipCt();
 	}
 	const upperLeft = ScoreBoard(turnCount, score);
+	
 	////////////////////END SCORE BOARD //////////////////////////////
+
+	///////////////////GAME STATE AND MESSAGES //////////////////////
+	const [gameState, setGameState] = useState(true);
+	const [gameOverMsg, setGameOverMsg] = useState("");
+
+	const resetGame = () => {
+		console.log("resetting game");
+		setScore(0);
+		setTurns(0);
+		setTurnSkipCt(0);
+		setBoxArray(boxInitial);
+		setGameState(true);
+	}
+
+	///////////////////END GAME STATE ////////////////////////////////
 	
 	////////////////////////PLAYER PLAQUE ////////////////////////////
 	const username = "Player 1";
@@ -70,12 +85,8 @@ export default function Board() {
 			incrementTurns();
 			addScore(value);
 		} catch (error) {
-			const scoreStr = "\nYour score was: " + score.toString();
-			alert("GAME OVER\n" + error.message + scoreStr);
-			setBoxArray(boxInitial);
-			setTurns(0);
-			setScore(0);
-			setTurnSkipCt(0);
+			setGameOverMsg(error.message);
+			setGameState(false);
 		}
 	}	
 	const makeCards = () => {
@@ -101,6 +112,8 @@ export default function Board() {
 	
 	return(
 		<div className = "board">	
+			<GameOverPopup onClose = {resetGame} score = {score} turnCount = {turnCount} message = {gameOverMsg} gameState = {gameState}
+				username={username}/>	
 			<CardChoiceBox>
 				<div className ="leftFlex">
 				{upperLeft}

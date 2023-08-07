@@ -1,12 +1,14 @@
 .board {
+	position:fixed;
 	width: 90%;
 	height: 90%;
 	border: 2px solid snow;
 	border-radius: 12px;
 	background-color: darkgray;
 	padding: 1rem;
-	min-width: 1200px;
-	min-height: 480px;
+	min-width: 1228px;
+	min-height: 690px;
+	top: 2vh;
 }
 
 .leftFlex {
