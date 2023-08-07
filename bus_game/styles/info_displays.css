@@ -11,5 +11,7 @@
 	height: 30%;
 	display: flex;
 	justify-content: center;
-	background-color: gold;
+	background-color: black;
+	border: 1px solid whitesmoke;
+	border-radius: 20px;
 }
