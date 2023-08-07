@@ -1,6 +1,6 @@
 import "../../../styles/board.css";
 import ScoreBoard from "../info_displays/score_board";
-import genBufferBoxDetails from "../buffer_box/gen_buffer_box_details";
+import genBufferBoxDetails, {BOX_COUNT} from "../buffer_box/gen_buffer_box_details";
 import MapBufferBoxes from "../buffer_box/map_buffer_boxes";
 import BufferBoxDisplay from "../buffer_box/buffer_box_display";
 import CardChoiceBox from "../../interactable/card/card_choice_box"; 
@@ -8,13 +8,13 @@ import Card from "../../interactable/card/card";
 import SkipDiv from "../../interactable/card/skip_div";
 import UserPlaque from "../info_displays/user_plaque";
 import { useState } from "react";
-import { makeAllocation } from "../../../lib/allocation/allocation"; 
+import { makeAllocation, countDown } from "../../../lib/allocation/allocation"; 
 import { genCardData } from "../../interactable/card/card_data";
 import { genColorChoice } from "../../../lib/allocation/allocation_helper";
 export default function Board() {
 		
 	///////////////////////// BOXES //////////////////////////////////////
-	const boxCount = 100;
+	const boxCount = BOX_COUNT;
 	const boxInitial = genBufferBoxDetails(boxCount);
 	const [boxStates, setBoxArray] = useState(boxInitial);
 	const boxes = MapBufferBoxes(boxStates);
@@ -28,6 +28,7 @@ export default function Board() {
 	}
 	const incrementTurns = () => {
 		setTurns(turnCount + 1);
+		incrementSkipCt();
 	}
 	const upperLeft = ScoreBoard(turnCount, score);
 	////////////////////END SCORE BOARD //////////////////////////////
@@ -37,8 +38,23 @@ export default function Board() {
 	const playerPlaque = UserPlaque(username);
 	////////////////////////END PLAYER PLAQUE ////////////////////////
 
-	
-	////////////////////////////CARDS////////////////////////////
+	//////////////////////// SKIP TURNS //////////////////////////////
+	const turnsRequired = 5;
+	const [turnSkipCt, setTurnSkipCt] = useState(0);
+	const skipTurn = () => {
+		makeCards();
+		incrementTurns();
+		setTurnSkipCt(0);
+		var boxCopy = boxStates;
+		countDown(boxCopy);
+		setBoxArray(boxCopy);
+	}
+	const incrementSkipCt = () => {
+		setTurnSkipCt(1 + turnSkipCt);
+	}
+	//////////////////////// END SKIP TURNS ////////////////////////
+
+	//////////////////////////// CARDS ////////////////////////////////////////////////////////
 	const [cardDataStates, setCardDataStates] = useState(genCardData(genColorChoice(boxStates)))
 	
 	const allocBuffer = (cardData) => {
@@ -48,8 +64,6 @@ export default function Board() {
 		const size = cardData.allocationSize;
 		const value = cardData.value;
 		try {
-			console.log(boxStates);
-			console.log(cardDataStates);
 			setBoxArray(makeAllocation(boxStates, type, size, color, turns));
 			incrementTurns();
 			addScore(value);
@@ -90,7 +104,7 @@ export default function Board() {
 				</div>
 				{playerPlaque}
 				<div className = "rightFlex">
-					<SkipDiv active = {true} clickHandler = {makeCards}/>
+					<SkipDiv active = {turnSkipCt > turnsRequired} clickHandler = {skipTurn}/>
 				</div>
 			</CardChoiceBox>
 			<CardChoiceBox>
