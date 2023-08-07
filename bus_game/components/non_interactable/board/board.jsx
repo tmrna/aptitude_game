@@ -11,6 +11,8 @@ import { useState } from "react";
 import { makeAllocation, countDown } from "../../../lib/allocation/allocation"; 
 import { genCardData } from "../../interactable/card/card_data";
 import { genColorChoice } from "../../../lib/allocation/allocation_helper";
+
+
 export default function Board() {
 		
 	///////////////////////// BOXES //////////////////////////////////////
