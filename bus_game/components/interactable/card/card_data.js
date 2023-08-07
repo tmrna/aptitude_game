@@ -1,13 +1,16 @@
 import { genRandColor } from "../../../lib/allocation/allocation_types";
 import { randNatural, randAllocType } from "../../../lib/utilities/rand";
-
+import { BOX_COUNT } from "../../non_interactable/buffer_box/gen_buffer_box_details";
 export function genCardData(colorChoices) {
-	const cardCt = 3;
+	const ALLOTED_PERCENTAGE = 0.4;
+	const MAX_TURNS = 9;
+	const CARD_CT = 3;
+
 	var colorChoicesClone = colorChoices;
 
-	const turnCtCard1 = randNatural(1, 10);
-	const turnCtCard2 = randNatural(1, 10);
-	const turnCtCard3 = randNatural(1, 10);
+	const turnCtCard1 = randNatural(1, MAX_TURNS);
+	const turnCtCard2 = randNatural(1, MAX_TURNS);
+	const turnCtCard3 = randNatural(1, MAX_TURNS);
 
 	const calcValue = (turnCt) => {
 		return 2 * turnCt - 1;
@@ -15,7 +18,7 @@ export function genCardData(colorChoices) {
 
 	var colors = [];
 
-	for(let i = 0; i < cardCt; ++i){
+	for(let i = 0; i < CARD_CT; ++i){
 		if(i >= colorChoices.length) {
 			colors.push(colorChoicesClone[i]);
 		}
@@ -32,7 +35,7 @@ export function genCardData(colorChoices) {
 				turnCt: turnCtCard1,
 				allocationType: randAllocType(),
 				allocColor: colors[0],
-				allocationSize: randNatural(1, 40),
+				allocationSize: randNatural(1, BOX_COUNT * ALLOTED_PERCENTAGE),
 			},
 			'card-2': {
 				id: 'card-2',
