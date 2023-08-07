@@ -2,7 +2,8 @@ import { genRandColor } from "../../../lib/allocation/allocation_types";
 import { randNatural, randAllocType } from "../../../lib/utilities/rand";
 
 export function genCardData(colorChoices) {
-	var colorChoicesClone = colorChoices
+	const cardCt = 3;
+	var colorChoicesClone = colorChoices;
 
 	const turnCtCard1 = randNatural(1, 10);
 	const turnCtCard2 = randNatural(1, 10);
@@ -14,7 +15,7 @@ export function genCardData(colorChoices) {
 
 	var colors = [];
 
-	for(let i = 0; i < 3; ++i){
+	for(let i = 0; i < cardCt; ++i){
 		if(i >= colorChoices.length) {
 			colors.push(colorChoicesClone[i]);
 		}
@@ -51,6 +52,7 @@ export function genCardData(colorChoices) {
 			}
 		},
 	};
+	
 
 	return cardData;
 }

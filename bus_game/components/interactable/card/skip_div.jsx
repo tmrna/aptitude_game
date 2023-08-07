@@ -1,13 +1,25 @@
+import { Colors } from "../../../lib/allocation/allocation_types";
 import "../../../styles/card.css";
 
 export default function SkipDiv({active, clickHandler}) {
-	/*
-	 *	on turn end generate 3 cards to replace given and take place of the taken card.
-	 */
+
+	var styling = {};
+	if(active) {
+		styling = {
+			backgroundColor: Colors.orange,
+			border: "2px solid black",
+			cursor: "pointer",
+			borderRadius: "10px",
+			width: "280px",
+			height: "294px"
+		};
+	}
 	if(active === true) {
 		return(
-			<div className = "skipDivActive" onClick = {clickHandler}>
-				<h1>SKIP</h1>
+			<div className = "skipDiv" onClick = {clickHandler}
+			style = {styling}
+			>
+			{active ? <h1>SKIP</h1> : <div/>}
 			</div>
 		)
 	}
