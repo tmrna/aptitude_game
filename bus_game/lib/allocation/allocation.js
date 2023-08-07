@@ -2,10 +2,8 @@ import { AllocationTypes } from "./allocation_types";
 import { genContiguousAlloc, genNonContiguousAlloc, getFreeBoxIndicies } from "./allocation_helper";
 
 export function makeAllocation(boxArray, allocationType, allocationSize, allocColor, turnCt) {
-	  for(let i = 0; i < boxArray.length; ++i) {
-	    if(boxArray[i].turnCt > 0) boxArray[i].turnCt--; 
-	    boxArray[i].occupied = boxArray[i].turnCt > 0;
-	  }
+	countDown(boxArray);
+
 	var freeIndicies = getFreeBoxIndicies(boxArray);
 	const err = "Allocation cannot be made: ";
 
@@ -26,3 +24,9 @@ export function makeAllocation(boxArray, allocationType, allocationSize, allocCo
 
 }
 
+export function countDown(boxArray) {
+  for(let i = 0; i < boxArray.length; ++i) {
+    if(boxArray[i].turnCt > 0) --boxArray[i].turnCt;
+    boxArray[i].occupied = boxArray[i].turnCt > 0;
+  }
+}
