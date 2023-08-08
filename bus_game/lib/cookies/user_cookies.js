@@ -1,4 +1,4 @@
-import { cookieExists, getCookie, setExpireableCookie } from "./cookie_helper";
+import { cookieExists, getCookie, setExpireableCookie, deleteCookie } from "./cookie_operations";
 
 const USERNAME_STRING = "username";
 
