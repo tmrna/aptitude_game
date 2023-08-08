@@ -60,23 +60,8 @@
 
 .skipDiv {
 	width: 284px;
-	height: 298px;
+	height: 130px;
 	transition: all .2s ease-in-out;
-}
-
-.skipDivActive {
-	position: relative;
- 	display: table;
-	background-color: orange;
-	color: black;
-	border: 2px solid black;	
-	border-radius: 10px;
-	width: 280px;
-	height: 294px;
-	text-align: center;
-	cursor: pointer;
-	transition: all .2s ease-in-out;
-	justify-content: center;
 }
 
 .cardChoiceBox {

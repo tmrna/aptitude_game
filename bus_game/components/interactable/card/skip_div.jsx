@@ -1,5 +1,6 @@
 import { Colors } from "../../../lib/allocation/allocation_types";
 import "../../../styles/card.css";
+import { doNothing } from "../popup/Popup";
 
 export default function SkipDiv({active, clickHandler}) {
 
@@ -11,21 +12,15 @@ export default function SkipDiv({active, clickHandler}) {
 			cursor: "pointer",
 			borderRadius: "10px",
 			width: "280px",
-			height: "294px"
-		};
-	}
-	if(active === true) {
-		return(
-			<div className = "skipDiv" onClick = {clickHandler}
-			style = {styling}
-			>
-			{active ? <h1>SKIP</h1> : <div/>}
-			</div>
-		)
+			height: "126px",
+			color: "whitesmoke"
+		}
 	}
 	return(
-		<div className = "skipDiv" >
+		<div className = "skipDiv" onClick = {active ? clickHandler : doNothing}
+		style = {styling}
+		>
+			{active ? <h1>SKIP</h1> : <div/>}
 		</div>
 	)
-
 }
