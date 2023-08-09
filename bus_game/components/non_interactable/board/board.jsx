@@ -14,7 +14,7 @@ import { genColorChoice } from "../../../lib/allocation/allocation_helper";
 import GameOverPopup from "../../interactable/popup/game_over";
 import { getUsername } from "../../../lib/cookies/user_cookies";
 import Signin from "../../interactable/popup/signin";
-import { deserializeScores, pushScore } from "../../../lib/cookies/score_cookies";
+import { pushScore } from "../../../lib/cookies/score_cookies";
 
 export default function Board() {
 	///////////////////////// BOXES //////////////////////////////////////
