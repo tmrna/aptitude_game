@@ -20,6 +20,6 @@ export default function Popup({trigger, onTrigger = doNothing, onClose = doNothi
 		)
 	}
 	else{
-		return (<div/>);
+		return (null);
 	}
 }

@@ -24,3 +24,30 @@
 	box-shadow: 0px 2px 4px darkgray;
 	color: black;
 }
+
+.centeredDivChild {
+	position: absolute;
+	top: 50%;
+	left:50%;
+	transform: translate(-50%, -150%);
+	width: 30%;
+	height: 20%
+
+}
+
+.signInBox {
+	width: 90%;
+	height: 200%;
+	background-color: darkgray;
+	box-shadow: 0px 3px 3px black;
+}
+
+.userNameWrapper {
+	position: absolute;
+	width: 70%;
+	height: 70%;
+	background-color: lightgray;
+	transform: translate(15%, 70%);
+	align-content: center;
+	margin: auto;
+}

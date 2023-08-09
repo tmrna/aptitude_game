@@ -12,6 +12,9 @@ import { makeAllocation, countDown } from "../../../lib/allocation/allocation";
 import { genCardData } from "../../interactable/card/card_data";
 import { genColorChoice } from "../../../lib/allocation/allocation_helper";
 import GameOverPopup from "../../interactable/popup/game_over";
+import { getUsername } from "../../../lib/cookies/user_cookies";
+import Signin from "../../interactable/popup/signin";
+import { deserializeScores, pushScore } from "../../../lib/cookies/score_cookies";
 
 export default function Board() {
 	///////////////////////// BOXES //////////////////////////////////////
@@ -39,6 +42,9 @@ export default function Board() {
 	const [gameState, setGameState] = useState(true);
 	const [gameOverMsg, setGameOverMsg] = useState("");
 
+	const submitScore = () => {
+		pushScore(score);
+	}
 	const resetGame = () => {
 		console.log("resetting game");
 		setScore(0);
@@ -51,8 +57,16 @@ export default function Board() {
 	///////////////////END GAME STATE ////////////////////////////////
 	
 	////////////////////////PLAYER PLAQUE ////////////////////////////
-	const username = "Player 1";
-	const playerPlaque = UserPlaque(username);
+	const [loginState, setLoginState] = useState(false);
+	const [playerName, setPlayerName] = useState(getUsername());
+	const playerPlaque = UserPlaque(playerName);
+	const logout = () => {
+		setLoginState(false);
+	}
+	const login = () => {
+		setLoginState(true);
+		setPlayerName(getUsername);
+	}
 	////////////////////////END PLAYER PLAQUE ////////////////////////
 
 	//////////////////////// SKIP TURNS //////////////////////////////
@@ -113,7 +127,8 @@ export default function Board() {
 	return(
 		<div className = "board">	
 			<GameOverPopup onClose = {resetGame} score = {score} turnCount = {turnCount} message = {gameOverMsg} gameState = {gameState}
-				username={username}/>	
+				username={playerName} onTrigger={submitScore}/>	
+			<Signin signInState = {loginState === false} onClose = {login} />
 			<CardChoiceBox>
 				<div className ="leftFlex">
 				{upperLeft}
@@ -138,6 +153,9 @@ export default function Board() {
 			<BufferBoxDisplay>
 				{boxes}
 			</BufferBoxDisplay>
+			</CardChoiceBox>
+			<CardChoiceBox>
+			<button onClick = {logout} style={{transform:"translate(0%, 60%)"}}> Logout </button>
 			</CardChoiceBox>
 		</div>
 	);

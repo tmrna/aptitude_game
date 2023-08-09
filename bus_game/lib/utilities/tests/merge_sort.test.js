@@ -1,4 +1,4 @@
-import { mergeSort, merge } from "../merge_sort";
+import { mergeSort, merge, ASCENDING_SORT, DESCENDING_SORT } from "../merge_sort";
 import { test, expect } from "vitest";
 import { randNatural } from "../rand";
 
@@ -6,7 +6,6 @@ test("testing merge standard", () => {
   let left = [3, 4, 7];
   let right = [2, 6, 9];
   let res = merge(left, right);
-  console.log(res);
   expect(res).toStrictEqual([2,3,4,6,7,9])
 })
 
@@ -31,6 +30,7 @@ test("testing merge on 2d", () => {
 test("merge with repeating values", () => {
     var toTest = [0, 0, 0, 0, -1, 3, -4, 9, 4];
     toTest = mergeSort(toTest);
+    console.log(toTest);
     expect(toTest).toStrictEqual([-4, -1, 0, 0, 0, 0, 3, 4, 9]);
 })
 
@@ -45,4 +45,10 @@ test("testing large array for recursion limit", () => {
   for(let i = 0; i < toTest.length - 1; ++i) {
     expect(toTest[i]).lessThanOrEqual(toTest[i + 1]);
   }
+})
+
+test("testing descending sort", () => {
+  var toTest = [1, 2, 3];
+  toTest = mergeSort(toTest, DESCENDING_SORT);
+  expect(toTest).toStrictEqual([3, 2, 1]);
 })

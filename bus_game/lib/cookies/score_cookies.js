@@ -1,7 +1,8 @@
-import { mergeSort } from "../utilities/merge_sort";
+import { DESCENDING_SORT, mergeSort } from "../utilities/merge_sort";
 import { deleteCookie, getCookie, setExpireableCookie } from "./cookie_operations";
 import { GUEST_TAG, getUsername } from "./user_cookies";
 
+const scoreValueIndex = 1;
 const SCORE_NAME = "scores";
 const SCORE_DAYS_TILL_EX = 30;
 
@@ -26,7 +27,6 @@ export function deserializeScores() {
 			scoreboardArray.push(usernameScore);
 		}
 	}
-
 	return scoreboardArray;
 }
 
@@ -45,7 +45,7 @@ export function pushScore(scoreNumber) {
 		scoreString += username + ':' + scoreNumber.toString();
 		replaceScoreString(scoreString);
 	}
-	sortScoreboard();
+	//sortScoreboard();
 }
 
 export function updateScoreCookie(newScore, scoreString, username) {
@@ -80,7 +80,7 @@ export function updateScoreCookie(newScore, scoreString, username) {
 
 		}
 	}
-	sortScoreboard();
+	//sortScoreboard();
 	return true;
 }
 
@@ -90,6 +90,6 @@ export function clearScoreboard() {
 
 export function sortScoreboard() {
 	var usernameScoreArray = deserializeScores();
-	usernameScoreArray = mergeSort(usernameScoreArray, 1);
+	usernameScoreArray = mergeSort(usernameScoreArray, DESCENDING_SORT, scoreValueIndex);
 	replaceScoreString(usernameScoreArray);
 }
