@@ -1,6 +1,6 @@
 import { Colors } from "../../../lib/allocation/allocation_types";
 import "../../../styles/card.css";
-import { doNothing } from "../popup/Popup";
+import { doNothing } from "../popup/full_popup";
 
 export default function SkipDiv({active, clickHandler}) {
 

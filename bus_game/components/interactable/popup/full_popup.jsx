@@ -5,7 +5,7 @@ import CardChoiceBox from "../card/card_choice_box";
 export function doNothing() {
 	return;
 }
-export default function Popup({trigger, onTrigger = doNothing, onClose = doNothing, closeBtnTxt, children}) {
+export default function FullPopup({trigger, onTrigger = doNothing, onClose = doNothing, closeBtnTxt, children}) {
 	if(trigger) {
 		if(onTrigger) onTrigger();
 		return(

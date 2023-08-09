@@ -1,10 +1,10 @@
 import { deserializeScores } from "../../../lib/cookies/score_cookies";
 import { DESCENDING_SORT, mergeSort } from "../../../lib/utilities/merge_sort";
-import Popup, { doNothing } from "./Popup";
+import FullPopup, { doNothing } from "./full_popup";
 
-export default function GameOverPopup({gameState, score, turnCount, message, username, onTrigger = doNothing, onClose = doNothing}) {
+export default function GameOverFullPopup({gameState, score, turnCount, message, username, onTrigger = doNothing, onClose = doNothing}) {
 	return(
-		<Popup onClose = {onClose} onTrigger = {onTrigger} trigger = {!gameState} closeBtnTxt = "Play again">
+		<FullPopup onClose = {onClose} onTrigger = {onTrigger} trigger = {!gameState} closeBtnTxt = "Play again">
 			<div>
 				<h1> GAME OVER </h1>
 			</div>
@@ -26,6 +26,6 @@ export default function GameOverPopup({gameState, score, turnCount, message, use
 					)
 				})}
 			</div>
-		</Popup>
+		</FullPopup>
 	)
 }

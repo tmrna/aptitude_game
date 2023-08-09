@@ -1,5 +1,5 @@
 import { setUserCookie, getUsername } from "../../../lib/cookies/user_cookies";		
-import Popup, { doNothing } from "./Popup";
+import FullPopup, { doNothing } from "./full_popup";
 import "../../../styles/popup.css";
 
 export default function Signin({signInState, onTrigger = doNothing, onClose = doNothing, onInit = doNothing}) {
@@ -8,7 +8,7 @@ export default function Signin({signInState, onTrigger = doNothing, onClose = do
 		const unameField = document.getElementById("usernameField");
 		const uname = unameField.value;
 		if(uname.length > 10){
-			alert("usernames are limited to 10 characters");
+			Popup.alert("usernames are limited to 10 characters");
 			return;
 		}
 		const regexSpecials = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
@@ -20,7 +20,7 @@ export default function Signin({signInState, onTrigger = doNothing, onClose = do
 		onClose();
 	}
 	return(
-		<Popup trigger = {signInState} onTrigger = {onTrigger} onClose ={updateCookieAndOnClose} closeBtnTxt = {"Sign in"} >
+		<FullPopup trigger = {signInState} onTrigger = {onTrigger} onClose ={updateCookieAndOnClose} closeBtnTxt = {"Sign in"} >
 			<div className = "centeredDivChild">
 				<h1> BUFFER GAME </h1>
 				<div className = "signInBox">
@@ -30,6 +30,6 @@ export default function Signin({signInState, onTrigger = doNothing, onClose = do
 					</div>
 				</div>
 			</div>
-		</Popup>
+		</FullPopup>
 	)
 } 
