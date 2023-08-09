@@ -8,7 +8,7 @@ export default function Signin({signInState, onTrigger = doNothing, onClose = do
 		const unameField = document.getElementById("usernameField");
 		const uname = unameField.value;
 		if(uname.length > 10){
-			Popup.alert("usernames are limited to 10 characters");
+			alert("usernames are limited to 10 characters");
 			return;
 		}
 		const regexSpecials = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
