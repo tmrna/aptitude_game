@@ -1,12 +1,7 @@
-const date = new Date();
-
-export const getCurrTimeMiliseconds = date.getTime();
-
-export function makeDayAt(exTime) {
-	const resDate = new Date();
-	resDate.setDate(getCurrTimeMiliseconds(), exTime);
-	return resDate;
-}
+export function getCurrTimeMiliseconds() {
+	const date = new Date();
+	return date.getTime();
+} 
 
 export function notWhiteSpace(ch){
 	return !(ch ==='\t' || ch ==='\n' || ch ===' ');
@@ -33,11 +28,11 @@ export function hasWhiteSpaceAt(str, index) {
 export function fmtCookieInfo(name, value, timeTillExMs, path='/') {
 	const cookieExTime = timeTillExMs + getCurrTimeMiliseconds();
 	const exDate = new Date();
-	exDate.setDate(getCurrTimeMiliseconds(), cookieExTime);
+	exDate.setTime(cookieExTime);
 	
 	let cookieExpirationInfo = "expires=" + exDate.toUTCString() + ";";
-	let cookiePath = "path=" + path;
+	let cookiePath = "path=" + path + ";";
 	let cookieName = name + "=";
-	var cookieInfo = cookieName + value + ';' + cookieExpirationInfo + cookiePath; 
+	var cookieInfo = cookieName + value + ';' + cookieExpirationInfo + "SameSite=None;secure=true;" + cookiePath; 
 	return cookieInfo;
 }
