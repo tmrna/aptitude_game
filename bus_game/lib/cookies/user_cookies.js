@@ -11,7 +11,7 @@ export function deleteUsername() {
 	deleteCookie(USERNAME_STRING);
 }
 
-export function getUserName() {
+export function getUsername() {
 	return getCookie(USERNAME_STRING);
 }
 

@@ -1,5 +1,5 @@
 import { deleteCookie, getCookie, setExpireableCookie } from "./cookie_operations";
-import { GUEST_TAG, getUserName } from "./user_cookies";
+import { GUEST_TAG, getUsername } from "./user_cookies";
 
 const SCORE_NAME = "scores";
 const SCORE_DAYS_TILL_EX = 30;
@@ -13,27 +13,27 @@ function replaceScoreString(scoreString){
 }
 
 export function deserializeScores() {
-	const scoreBoardString = getCookie(SCORE_NAME);
-	const scoreBoardStringArray = scoreBoardString.split(',');
-	const scoreBoardArray = [];
+	const scoreboardString = getCookie(SCORE_NAME);
+	const scoreboardStringArray = scoreboardString.split(',');
+	const scoreboardArray = [];
 
-	for(let i = 0; i < scoreBoardStringArray.length; ++i) {
-		const scoreInstance = scoreBoardStringArray[i];
+	for(let i = 0; i < scoreboardStringArray.length; ++i) {
+		const scoreInstance = scoreboardStringArray[i];
 		var usernameScore = scoreInstance.split(':');
 		if(usernameScore.length === 2) {
 			usernameScore[1] = Number(usernameScore[1]);
-			scoreBoardArray.push(usernameScore);
+			scoreboardArray.push(usernameScore);
 		}
 	}
 
-	return scoreBoardArray;
+	return scoreboardArray;
 }
 
 export function pushScore(scoreNumber) {
 	if(isNaN(scoreNumber)) throw new TypeError("score must be a number.");
 
 	var scoreString = getCookie(SCORE_NAME);
-	const username = getUserName();
+	const username = getUsername();
 
 	if(username === GUEST_TAG) return;
 
@@ -80,6 +80,6 @@ export function updateScoreCookie(newScore, scoreString, username) {
 	return true;
 }
 
-export function clearScoreBoard() {
+export function clearScoreboard() {
 	deleteCookie(SCORE_NAME);
 }
