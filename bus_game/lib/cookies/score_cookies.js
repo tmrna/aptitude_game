@@ -1,3 +1,4 @@
+import { mergeSort } from "../utilities/merge_sort";
 import { deleteCookie, getCookie, setExpireableCookie } from "./cookie_operations";
 import { GUEST_TAG, getUsername } from "./user_cookies";
 
@@ -44,6 +45,7 @@ export function pushScore(scoreNumber) {
 		scoreString += username + ':' + scoreNumber.toString();
 		replaceScoreString(scoreString);
 	}
+	sortScoreboard();
 }
 
 export function updateScoreCookie(newScore, scoreString, username) {
@@ -75,8 +77,10 @@ export function updateScoreCookie(newScore, scoreString, username) {
 			newScoreString += newScore.toString();
 			newScoreString += upperRegion;
 			replaceScoreString(newScoreString)
+
 		}
 	}
+	sortScoreboard();
 	return true;
 }
 
@@ -85,6 +89,7 @@ export function clearScoreboard() {
 }
 
 export function sortScoreboard() {
-	const scoreString = getCookie(SCORE_NAME);
-	var userScoreArray = scoreString.split(',');
+	var usernameScoreArray = deserializeScores();
+	usernameScoreArray = mergeSort(usernameScoreArray, 1);
+	replaceScoreString(usernameScoreArray);
 }
