@@ -7,7 +7,7 @@ function App() {
   return (
     <>
     <ViewPort>
-    <Board/>
+      <Board/>
     </ViewPort>
     </>
   )

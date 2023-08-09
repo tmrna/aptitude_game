@@ -9,15 +9,15 @@ export default function Card( {cardData} ) {
 		className="card"
 		style = {{backgroundColor: cardData.allocColor}}
 		>
-		<CardHeader>
-		<p>Value: {cardData.value}</p>
-		</CardHeader>
-		<div className = "spacer"/>
-		<CardBody>
-		<p>Turns reamaining: {cardData.turnCt}</p>
-		<p>Allocation: {cardData.allocationType}</p>
-		<p>Space Required: {cardData.allocationSize}</p>
-		</CardBody>
+			<CardHeader>
+					<p>Value: {cardData.value}</p>
+			</CardHeader>
+				<div className = "spacer"/>
+			<CardBody>
+				<p>Turns reamaining: {cardData.turnCt}</p>
+				<p>Allocation: {cardData.allocationType}</p>
+				<p>Space Required: {cardData.allocationSize}</p>
+			</CardBody>
 		</div>
 	)	
 	

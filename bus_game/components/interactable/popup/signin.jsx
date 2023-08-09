@@ -24,10 +24,10 @@ export default function Signin({signInState, onTrigger = doNothing, onClose = do
 			<div className = "centeredDivChild">
 				<h1> BUFFER GAME </h1>
 				<div className = "signInBox">
-				<div className = "userNameWrapper">
-					<label>Username: </label> 
-					<input defaultValue={getUsername()} id = "usernameField"/> 
-				</div>
+					<div className = "userNameWrapper">
+						<label>Username: </label> 
+						<input defaultValue={getUsername()} id = "usernameField"/> 
+					</div>
 				</div>
 			</div>
 		</Popup>

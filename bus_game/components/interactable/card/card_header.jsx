@@ -1,8 +1,5 @@
+import lazyDiv from "../../../lib/utilities/lazy_div";
 import "../../../styles/card.css";
 export default function CardHeader({children}) {
-	return (
-		<div className = "cardHeader">
-		{children}	
-		</div>
-	)
+	return lazyDiv("cardHeader", children); 
 }

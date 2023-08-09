@@ -12,7 +12,7 @@ export default function GameOverPopup({gameState, score, turnCount, message, use
 				<h2>{message}</h2>
 			</div>
 			<div>
-			<h1>Congratulations {username} your score was {score} after {turnCount} {turnCount === 1 ? "turn" : "turns"}!</h1>
+				<h1>Congratulations {username} your score was {score} after {turnCount} {turnCount === 1 ? "turn" : "turns"}!</h1>
 			</div>
 			<div>
 				<h2>Scoreboard</h2>

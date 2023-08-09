@@ -126,12 +126,15 @@ export default function Board() {
 	
 	return(
 		<div className = "board">	
+
 			<GameOverPopup onClose = {resetGame} score = {score} turnCount = {turnCount} message = {gameOverMsg} gameState = {gameState}
 				username={playerName} onTrigger={submitScore}/>	
+
 			<Signin signInState = {loginState === false} onClose = {login} />
+
 			<CardChoiceBox>
 				<div className ="leftFlex">
-				{upperLeft}
+					<ScoreBoard score = {score} turnCount = {turnCount}/>
 				</div>
 				{playerPlaque}
 				<div className = "rightFlex">
@@ -149,14 +152,14 @@ export default function Board() {
 				})}	
 			</CardChoiceBox>
 			<div style={{width: "30px", height: "40px"}}/>
-			<CardChoiceBox>
-			<BufferBoxDisplay>
-				{boxes}
-			</BufferBoxDisplay>
-			</CardChoiceBox>
-			<CardChoiceBox>
-			<button onClick = {logout} style={{transform:"translate(0%, 60%)"}}> Logout </button>
-			</CardChoiceBox>
+				<CardChoiceBox>
+					<BufferBoxDisplay>
+						{boxes}
+					</BufferBoxDisplay>
+				</CardChoiceBox>
+				<CardChoiceBox>
+					<button onClick = {logout} style={{transform:"translate(0%, 60%)"}}> Logout </button>
+				</CardChoiceBox>
 		</div>
 	);
 }

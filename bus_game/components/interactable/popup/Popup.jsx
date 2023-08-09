@@ -10,12 +10,12 @@ export default function Popup({trigger, onTrigger = doNothing, onClose = doNothi
 		if(onTrigger) onTrigger();
 		return(
 		<div className = "popup">
-		<CardChoiceBox>
-		<div className = "popupInner">
-		{children}
-		</div>
-		</CardChoiceBox>
-		<button className = "closeBtn" onClick={onClose ? onClose : doNothing}>{closeBtnTxt}</button>
+			<CardChoiceBox>
+				<div className = "popupInner">
+					{children}
+				</div>
+			</CardChoiceBox>
+			<button className = "closeBtn" onClick={onClose ? onClose : doNothing}>{closeBtnTxt}</button>
 		</div>
 		)
 	}

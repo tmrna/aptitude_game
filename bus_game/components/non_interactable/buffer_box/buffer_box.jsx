@@ -14,11 +14,11 @@ export default function bufferBox(index, boxStatus) {
 
 	return (
 		<div key = {index}>
-		<div className = "bufferBox" style = {{backgroundColor: color}}/>
-		<div className = "bufferBoxCounter" style={{color: fontColor}}>
-		{boxStatus.turnCt > 0 ? <p>{boxStatus.turnCt}</p> : <p/>}
-		</div>
-		<div style = {shadow}/>
+			<div className = "bufferBox" style = {{backgroundColor: color}}/>
+				<div className = "bufferBoxCounter" style={{color: fontColor}}>
+					{boxStatus.turnCt > 0 ? <p>{boxStatus.turnCt}</p> : <p/>}
+				</div>
+			<div style = {shadow}/>
 		</div>
 	)	
 }
