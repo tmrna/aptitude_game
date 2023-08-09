@@ -1,0 +1,64 @@
+.popup {
+	position: fixed;
+	width: 90%;
+	height: 90%;
+	background-color: gray;
+	z-index: 100;
+	box-shadow: 0px 2px 9px black;
+	min-width: 1230px;
+	min-height: 696px;
+	align-content: center;
+	border-radius: 8px;
+}
+
+.popupInner {
+	width: 70vw;
+	height:80vh;
+	background-color: lightgray;
+	min-width: 1225px;
+	min-height: 560px;
+	align-content: center;
+	margin: auto;
+	border: 2px solid black;
+	border-radius: 8px;
+	box-shadow: 0px 2px 4px darkgray;
+	color: black;
+}
+
+.centeredDivChild {
+	position: absolute;
+	top: 50%;
+	left:50%;
+	transform: translate(-50%, -150%);
+	width: 30%;
+	height: 20%
+
+}
+
+.signInBox {
+	width: 90%;
+	height: 200%;
+	background-color: darkgray;
+	box-shadow: 0px 3px 3px black;
+}
+
+.userNameWrapper {
+	position: absolute;
+	width: 70%;
+	height: 70%;
+	background-color: lightgray;
+	transform: translate(15%, 70%);
+	align-content: center;
+	margin: auto;
+}
+
+.scrollableScore {
+	border-radius: 5px;
+	position: absolute;
+	height: 30%;
+	width: 30%;
+	transform:translateX(80%);
+	background-color: whitesmoke;
+	overflow-y: scroll;
+	border: 2px solid black;
+}

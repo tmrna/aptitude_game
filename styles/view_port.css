@@ -1,0 +1,8 @@
+.viewPort {
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+	justify-content: center;
+	background-image: url(https://www.scenicguild.org/wp-content/uploads/2021/02/Q-cover-scaled-e1614308906968.jpg);
+	overflow: hidden;
+}
