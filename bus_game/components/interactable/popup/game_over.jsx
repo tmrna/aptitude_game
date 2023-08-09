@@ -17,13 +17,15 @@ export default function GameOverPopup({gameState, score, turnCount, message, use
 			<div>
 				<h2>Scoreboard</h2>
 			</div>
-			{mergeSort(deserializeScores(), DESCENDING_SORT, 1).map((array) => {
-				return(
-				<div>
-					<p>{array[0]} : {array[1]}</p>
-				</div>
-				)
-			})}
+			<div className = "scrollableScore">
+				{mergeSort(deserializeScores(), DESCENDING_SORT, 1).map((array) => {
+					return(
+					<div>
+						<p>{array[0]} : {array[1]}</p>
+					</div>
+					)
+				})}
+			</div>
 		</Popup>
 	)
 }

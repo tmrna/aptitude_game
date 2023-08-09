@@ -51,3 +51,14 @@
 	align-content: center;
 	margin: auto;
 }
+
+.scrollableScore {
+	border-radius: 5px;
+	position: absolute;
+	height: 30%;
+	width: 30%;
+	transform:translateX(80%);
+	background-color: whitesmoke;
+	overflow-y: scroll;
+	border: 2px solid black;
+}
