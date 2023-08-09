@@ -38,7 +38,6 @@ export function pushScore(scoreNumber) {
 	if(username === GUEST_TAG) return;
 
 	if(updateScoreCookie(scoreNumber, scoreString, username)) return;
-
 	
 	if(scoreString.length > 0) scoreString += ',';
 	if(username.length > 0){

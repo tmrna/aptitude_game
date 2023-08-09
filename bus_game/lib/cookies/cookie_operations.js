@@ -7,17 +7,22 @@ const DAY_AS_HOUR = 24*HOUR_AS_MINUTES;
 
 export function setExpireableCookie(cookieName, cookieValue, daysTillEx, path="/") {
 	const daysTillExMilliseconds = daysTillEx*DAY_AS_HOUR;	
-	document.cookie = fmtCookieInfo(cookieName, cookieValue, daysTillExMilliseconds, path);
+	const info = fmtCookieInfo(cookieName, cookieValue, daysTillExMilliseconds, path);
+	document.cookie = info;
 }
 
 export function searchCookie(cookie, targetName) {
 	const name = targetName + "=";
-	var index = 0;
-	while(hasWhiteSpaceAt(cookie, index) && index < cookie.length) ++index;
-	
-	if(cookie.indexOf(name) == index){
-		const lenToOmitName = index + name.length;
-		return cookie.substring(lenToOmitName, cookie.length);
+	var index = cookie.search(name);
+	if(index === -1) return "";
+	return cookie.substring(index + name.length);
+}
+
+export function searchCookieDetails(cookieDetails, targetField) {
+	const startIndex = cookieDetails.search(targetField);
+	if(startIndex != -1) {
+		const offset = targetField.length + startIndex + 1;
+		return cookie.substring(offset, cookieDetails.length);
 	}
 	return "";
 }
@@ -25,11 +30,18 @@ export function searchCookie(cookie, targetName) {
 export function getCookie(cookieName) {
 	let decoded = decodeURIComponent(document.cookie);
 	let allCookies = decoded.split(';');
-
-	for(const cookie in allCookies) {
-		const cookieSubstr = searchCookie(cookie, cookieName);
-		if(cookieSubstr != "") return cookieSubstr;
+	for(let i = 0; i < allCookies.length; ++i) {
+		const cookie = allCookies[i];
+		try{
+			const value = searchCookie(cookie, cookieName);
+			if(value != "") {
+				return value;
+			}
+		}
+		catch (e) {
+		}
 	}
+	return "";
 }
 
 export function cookieExists(cookieName) {
