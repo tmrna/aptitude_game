@@ -83,3 +83,8 @@ export function updateScoreCookie(newScore, scoreString, username) {
 export function clearScoreboard() {
 	deleteCookie(SCORE_NAME);
 }
+
+export function sortScoreboard() {
+	const scoreString = getCookie(SCORE_NAME);
+	var userScoreArray = scoreString.split(',');
+}
