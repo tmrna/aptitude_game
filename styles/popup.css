@@ -53,11 +53,11 @@
 }
 
 .scrollableScore {
-	border-radius: 5px;
 	position: absolute;
+	border-radius: 5px;
 	height: 30%;
 	width: 30%;
-	transform:translateX(80%);
+	left: 35%;
 	background-color: whitesmoke;
 	overflow-y: scroll;
 	border: 2px solid black;
