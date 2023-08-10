@@ -1,6 +1,5 @@
 {
   "name": "bus_game",
-  "homepage": "https://tmrna.github.io/aptitude_game",
   "private": true,
   "version": "0.0.0",
   "type": "module",
