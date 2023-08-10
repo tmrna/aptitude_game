@@ -1,8 +1,15 @@
-# React + Vite
+# Buffer Game 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+To play the game select a card and the contents will be allocated to the buffer. The location that the allocation occurrs is random.
+Upon allocation each box in the buffer will change to the color of the selected card along with how many turns are remaining before the
+resources are freed.
 
-Currently, two official plugins are available:
+# Allocation types
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+There are two types of allocation in the game contiguous and non-contiguous. With contiguous allocation a suitable location is chosen at random from
+the buffer then all new allocations occurr adjecently. With non-contiguous, n many boxes are chosen at random and allocated to.
+
+# How user data is stored
+
+The game runs on a static site and utilizes cookies to store information such as usernames and high scores. The username cookie persists for one day whereas
+the scoreboard persists for 30 days. (note, use within these time spans will reset the timers and prevent the cookies from expiring);

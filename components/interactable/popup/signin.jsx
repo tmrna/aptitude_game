@@ -19,6 +19,7 @@ export default function Signin({signInState, onTrigger = doNothing, onClose = do
 		setUserCookie(unameField.value);
 		onClose();
 	}
+
 	return(
 		<FullPopup trigger = {signInState} onTrigger = {onTrigger} onClose ={updateCookieAndOnClose} closeBtnTxt = {"Sign in"} >
 			<div className = "centeredDivChild">
@@ -26,7 +27,9 @@ export default function Signin({signInState, onTrigger = doNothing, onClose = do
 				<div className = "signInBox">
 					<div className = "userNameWrapper">
 						<label>Username: </label> 
-						<input defaultValue={getUsername()} id = "usernameField"/> 
+						<input defaultValue={getUsername()} id = "usernameField"type = "text" 
+		                                onKeyPress={(e)=>{if(e.key === 'Enter')
+						updateCookieAndOnClose();}}/> 
 					</div>
 				</div>
 			</div>
