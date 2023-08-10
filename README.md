@@ -2,7 +2,8 @@
 
 To play the game select a card and the contents will be allocated to the buffer. The location that the allocation occurrs is random.
 Upon allocation each box in the buffer will change to the color of the selected card along with how many turns are remaining before the
-resources are freed.
+resources are freed. If the player goes five turns without failure a skip button will appear letting them skip a turn. The button will only
+re-appear five turns after the press.
 
 # Allocation types
 
